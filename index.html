@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>World Time Finder – Check Current Time by Country</title>
+  <head>
+
+  <!-- 🌍 SEO META TAGS -->
+  <meta name="description" content="Find current time in any country or major city. Just type and get the time instantly!">
+  <meta name="keywords" content="current time, world clock, check time, time by country, time zones">
+  <meta name="author" content="Your Name">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 💬 Open Graph (для соцсетей) -->
+  <meta property="og:title" content="World Time Finder">
+  <meta property="og:description" content="Type a country or city and instantly see the current time.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://example.com/time-preview.jpg"> <!-- если добавишь картинку -->
+  <meta property="og:url" content="https://your-site.vercel.app"> <!-- укажи ссылку после публикации -->
+
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+
+  <h1>World Time Finder</h1>
+  <p>Type a country or city (e.g. "Japan", "New York", "Paris")</p>
+  <input type="text" id="locationInput" placeholder="Enter location...">
+  <button onclick="showTime()">Show Time</button>
+
+  <div id="result"></div>
+
+  <script>
+    const timezoneMap = {
+      "new york": "America/New_York",
+      "usa": "America/New_York",
+      "london": "Europe/London",
+      "uk": "Europe/London",
+      "moscow": "Europe/Moscow",
+      "russia": "Europe/Moscow",
+      "paris": "Europe/Paris",
+      "france": "Europe/Paris",
+      "berlin": "Europe/Berlin",
+      "germany": "Europe/Berlin",
+      "tokyo": "Asia/Tokyo",
+      "japan": "Asia/Tokyo",
+      "beijing": "Asia/Shanghai",
+      "china": "Asia/Shanghai",
+      "delhi": "Asia/Kolkata",
+      "india": "Asia/Kolkata",
+      "sydney": "Australia/Sydney",
+      "australia": "Australia/Sydney",
+      "cape town": "Africa/Johannesburg",
+      "south africa": "Africa/Johannesburg",
+      "sao paulo": "America/Sao_Paulo",
+      "brazil": "America/Sao_Paulo",
+      "cairo": "Africa/Cairo",
+      "egypt": "Africa/Cairo",
+       "uzbekistan":"Asia/Tashkent"
+    }
+
+    function showTime() {
+      const input = document.getElementById("locationInput").value.trim().toLowerCase();
+      const resultDiv = document.getElementById("result");
+
+      if (timezoneMap[input]) {
+        const timeZone = timezoneMap[input];
+        const now = new Date().toLocaleTimeString("en-US", {
+          timeZone: timeZone,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        });
+        resultDiv.innerHTML = `Current time in <strong>${input.toUpperCase()}</strong>: ${now}`;
+      } else {
+        resultDiv.innerHTML = `❌ Time zone for "<strong>${input}</strong>" not found. Try another city or country.`;
+      }
+    }
+  </script>
+
+</body>
+</html>
